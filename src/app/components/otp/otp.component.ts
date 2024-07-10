@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/user.service';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-otp',
@@ -104,7 +105,8 @@ export class OtpComponent {
     }
     let otp = data['otp1'] + data['otp2'] + data['otp3'] + data['otp4']
     this._userservice.otp_verify(otp, this.email).subscribe({
-      next: (res) => {
+      next: (res:any) => {
+        localStorage.setItem(environment.UserSecret,res['token'])
         this._router.navigate(['chat'])
       },
       error: (err) => {

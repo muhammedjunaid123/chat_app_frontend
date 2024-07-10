@@ -7,9 +7,10 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OtpComponent } from './components/otp/otp.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { httpInterceptorInterceptor } from './interceptor/http-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ChatComponent } from './components/chat/chat.component';
     ToastrModule.forRoot(),
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:httpInterceptorInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

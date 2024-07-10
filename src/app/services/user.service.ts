@@ -9,9 +9,9 @@ export class UserService {
   constructor(private _http:HttpClient){ }
 
   login(email:string){
-     return this._http.post('http://localhost:3000/user/login',{email:email})
+     return this._http.post('/user/login',{email:email})
   }
   otp_verify(otp:string,email:string){
-    return this._http.post('http://localhost:3000/user/otp',{email:email,otp:otp})
+    return this._http.post('/user/otp',{email:email,otp:otp})
   }
 }
