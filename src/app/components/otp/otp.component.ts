@@ -107,7 +107,7 @@ export class OtpComponent {
     this._userservice.otp_verify(otp, this.email).subscribe({
       next: (res:any) => {
         localStorage.setItem(environment.UserSecret,res['token'])
-        this._router.navigate(['chat'])
+        this._router.navigate(['Profile_edit'],{queryParams:{email:this.email}})
       },
       error: (err) => {
         console.log(err);

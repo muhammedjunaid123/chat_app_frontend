@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OtpComponent } from './components/otp/otp.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { httpInterceptorInterceptor } from './interceptor/http-interceptor.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { httpInterceptorInterceptor } from './interceptor/http-interceptor.inter
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:httpInterceptorInterceptor,multi:true}],
   bootstrap: [AppComponent]
