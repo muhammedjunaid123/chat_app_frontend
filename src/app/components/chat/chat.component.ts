@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
+import { ChatService } from '../../services/chat/chat.service';
+import { user } from '../../../types/user_interface';
 
 @Component({
   selector: 'app-chat',
@@ -7,14 +9,17 @@ import { fromEvent, Subscription } from 'rxjs';
   styleUrl: './chat.component.css'
 })
 export class ChatComponent implements OnInit {
+  constructor(private _chat: ChatService) { }
   resizeSubscription!: Subscription;
   isMediumScreen!: boolean
   chat_list!: boolean
+  user_list!: user[]
   ngOnInit(): void {
     this.checkScreenSize();
     this.resizeSubscription = fromEvent(window, 'resize').subscribe(() => {
       this.checkScreenSize();
     });
+  
   }
 
   private checkScreenSize(): void {

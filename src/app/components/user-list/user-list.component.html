@@ -1,0 +1,24 @@
+<div *ngFor="let user of user_list" class="bg-white flex-1 gap-2" (click)="send_user(user['email'])">
+    <div class="px-3 flex items-center bg-grey-light cursor-pointer" >
+        <div>
+            @if(!user['img']){
+            <img class="h-12 w-12 rounded-full hover:ring-2 ring-1  ring-black" src="../../../assets/unknown.jpg" />
+            }@else {
+            <img class="h-12 w-12 rounded-full hover:ring-2 ring-1  ring-black" [src]="user['img']" />
+            }
+        </div>
+        <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+            <div class="flex items-bottom justify-between">
+                <p class="text-grey-darkest">
+                    @if (!user['user_name']) {
+                    unknown 
+                    }@else {
+                    {{user['user_name']}}
+                    }
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
