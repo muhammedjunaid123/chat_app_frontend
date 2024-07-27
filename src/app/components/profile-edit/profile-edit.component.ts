@@ -1,5 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { loginGuard } from '../../guards/login.guard';
@@ -19,7 +19,8 @@ export class ProfileEditComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _UserService: UserService,
     private _fb: FormBuilder,
-    private _user_service: UserService
+    private _user_service: UserService,
+    private _router: Router
   ) { }
   ngOnInit(): void {
     this.user_form = this._fb.group({
@@ -27,8 +28,7 @@ export class ProfileEditComponent implements OnInit {
     })
 
     this._ActivatedRoute.queryParamMap.forEach((res) => {
-      this.email = res.get('email') || ''
-      this._UserService.get_user(this.email).subscribe((res: user) => {
+      this._UserService.get_user().subscribe((res: user) => {
         this.user_data = res
         this.user_form.setValue({
           name: this.user_data['user_name'] ?? '',
@@ -48,13 +48,8 @@ export class ProfileEditComponent implements OnInit {
     form.append('name', data.name)
     form.append('image', this.files)
     this._user_service.set_user_data(form, this.user_data._id).subscribe((res) => {
+      this._router.navigate(['chat'])
 
-      this._UserService.get_user(this.email).subscribe((res: user) => {
-        this.user_data = res
-        this.user_form.setValue({
-          name: this.user_data['user_name'] ?? '',
-        })
-      })
     })
 
   }

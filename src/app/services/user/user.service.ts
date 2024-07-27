@@ -16,8 +16,8 @@ export class UserService {
   otp_verify(otp: string, email: string) {
     return this._http.post('/user/otp', { email: email, otp: otp })
   }
-  get_user(email: string): Observable<user> {
-    return this._http.get<user>(`/user/get_user?email=${email}`)
+  get_user(): Observable<user> {
+    return this._http.get<user>(`/user/get_user`)
   }
   set_user_data(data:any,id:string){
    return this._http.post(`/user/set_user_data?id=${id}`,data)  

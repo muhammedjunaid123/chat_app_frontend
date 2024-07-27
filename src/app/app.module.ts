@@ -13,6 +13,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { httpInterceptorInterceptor } from './interceptor/http-interceptor.interceptor';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { UserListComponent } from './components/user-list/user-list.component';
+import { NullTextPipe } from './pipe/null-text.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     ProfileEditComponent,
     OtpComponent,
     ChatComponent,
-    UserListComponent
+    UserListComponent,
+    NullTextPipe
   ],
   imports: [
     BrowserModule,

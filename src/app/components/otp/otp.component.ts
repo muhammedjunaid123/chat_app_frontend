@@ -35,7 +35,6 @@ export class OtpComponent {
     this._ActivatedRoute.queryParamMap.subscribe(res => {
       this.email = res.get('email') || ''
       console.log(this.email);
-
     })
   }
 
@@ -107,7 +106,7 @@ export class OtpComponent {
     this._userservice.otp_verify(otp, this.email).subscribe({
       next: (res:any) => {
         localStorage.setItem(environment.UserSecret,res['token'])
-        this._router.navigate(['Profile_edit'],{queryParams:{email:this.email}})
+        this._router.navigate(['Profile_edit'])
       },
       error: (err) => {
         console.log(err);
