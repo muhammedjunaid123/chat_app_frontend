@@ -25,12 +25,19 @@ export class ChatComponent implements OnInit {
     this.resizeSubscription = fromEvent(window, 'resize').subscribe(() => {
       this.checkScreenSize();
     });
+    this._chat.get_msg().subscribe({
+      next:(res)=>{
+       this.selected_message=res
+       console.log(this.selected_message);
+       
+      }
+    })
+   
     this._chat.chat_list().subscribe({
       next: (res: any) => {
         this.user_chat = res['data']
         this.user_email = res['email']
         console.log(this.user_chat);
-        
       }
     })
   }
@@ -74,13 +81,6 @@ export class ChatComponent implements OnInit {
   send(){
     this._chat.send_msg(this.text_data,this.selected_chat['message_id'],this.user_email)
     this.text_data=''
-    this._chat.get_msg().subscribe({
-      next:(res)=>{
-       this.selected_message=res
-       console.log(this.selected_message);
-       
-      }
-    })
    
     
   }
