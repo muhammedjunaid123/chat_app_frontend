@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { ChatService } from '../../services/chat/chat.service';
-import { user } from '../../../types/user_interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +8,18 @@ import { Router } from '@angular/router';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit,AfterViewChecked {
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
+  private scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
   constructor(private _chat: ChatService, private _router: Router) { }
   resizeSubscription!: Subscription;
   isMediumScreen!: boolean
