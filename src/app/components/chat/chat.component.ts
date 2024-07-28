@@ -76,8 +76,6 @@ export class ChatComponent implements OnInit,AfterViewChecked {
     this._chat.user_message(data['message_id']).subscribe({
       next: (res: any) => {
         this.selected_message = res
-        console.log(this.selected_message);
-
       }
     })
   }

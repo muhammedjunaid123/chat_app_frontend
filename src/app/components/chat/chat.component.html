@@ -32,8 +32,8 @@
                         </div>
                 </div>
                 }@else {
-                <div *ngFor="let user of user_chat" class="bg-white flex-1">
-                    <div class="px-3 flex items-center bg-grey-light cursor-pointer" (click)="in_chat()">
+                <div class="bg-white flex-1">
+                    <div *ngFor="let user of user_chat" class="flex items-center bg-grey-light cursor-pointer" (click)="in_chat()">
                         <div>
                             @if (user['result'][0]['email']===user_email) {
                             @if (user['result'][1]['img']!=='') {
